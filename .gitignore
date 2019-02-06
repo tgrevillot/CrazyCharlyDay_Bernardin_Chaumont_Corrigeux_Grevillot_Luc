@@ -1,1 +1,3 @@
 autoPull.php
+vendor/
+composer.lock
