@@ -74,3 +74,20 @@ form{
     background-color: cornflowerblue;
     border-color: cornflowerblue;
 }
+
+
+.icone {
+    vertical-align: middle;
+}
+
+.conteneur{
+    padding-top: 9%;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    padding-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
