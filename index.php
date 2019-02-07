@@ -23,4 +23,9 @@ $app->get('/candidatures/$id',function($id){
     $c->afficherTout($id);
 });
 
+$app->get('/formInscription',function(){
+    $v = new VueConnexion("inscription");
+    echo $v->render("");
+})->name('formInscription');
+
 $app->run();
