@@ -85,7 +85,7 @@ END;
             <p><input type="text" name="pseudo" class="form-control" aria-describedby="emailHelp" placeholder="Pseudo" required></p>
             <p><input type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
             <p><input type="password" name="confirmPass" class="form-control" aria-describedby="emailHelp" placeholder="Confirmer mot de passe" required></p>
-            <p><a href=$lienConnec><label class="btn btn-secondary">Annuler</label></a><button type="submit" class="btn btn-primary" name="inscription" value="inscription">Inscription</button></p>
+            <p><a href=$lienConnec><label class="annul btn btn-secondary">Annuler</label></a><button type="submit" class="btn btn-primary" name="inscription" value="inscription">Inscription</button></p>
         </form>
 END;
         return $html;
@@ -105,6 +105,7 @@ END;
             <p><input type="password" name="pass" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
             <a href=$lien><p class="text-muted">S'inscrire.</p></a>
             <p><button type="submit" class="btn btn-primary" name="connexion" value="connec">Connexion</button></p>
+            <p><a href=""><button class="btn btn-primary" name="invite" value="invite">Se connecter en tant qu'invité</button></a></p>
         </form>
 END;
         return $html;

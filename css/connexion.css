@@ -22,6 +22,13 @@ body{
 
 .btn{
     vertical-align: baseline;
+    background-color: rgb(255, 169, 43);
+    border-color:  rgb(255, 169, 43);
+}
+
+.btn:hover {
+    background-color: firebrick;
+    border-color: firebrick;
 }
 
 .text-muted{
@@ -59,4 +66,11 @@ form{
     max-width: 330px;
     padding: 15px;
     margin: auto;
+}
+
+.annul {
+    margin-left: 5px;
+    margin-right: 10px;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
