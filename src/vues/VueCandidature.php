@@ -27,10 +27,12 @@ class VueCandidature{
 
     $html .= '<li>'.$this->candidatures->etat.'</li>';
     $html .= '<li>'.$this->candidatures->description.'</li>';
+    $html .= '<li>'.$this->candidatures->adresseD.'</li>';
+    $html .= '<li>'.$this->candidatures->adresseA.'</li>';
 
     $html .= '</ul>';
 
-    $modifierC = $this->app->urlFor('modifierCandidature');
+    $modifierC = $this->app->urlFor('modifierCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
 
     $html .= '<form method="GET" action= "'.$modifierC.'">';
     $html .= '<button class="btn" value="modifierCandidature">Modifier la candidature</button>';
@@ -51,13 +53,14 @@ class VueCandidature{
 
     $html .= '</ul>';
 
-    $modifier_C = $this->app->urlFor('modifierCandidature');
+    $modifier_C = $this->app->urlFor('validerModification',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
+    $suppimerC = $this->app->urlFor('supprimerCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
 
-    $html .= '<form method="GET" action= "'.$modifier_C.'">';
+    $html .= '<form method="POST" action= "'.$modifier_C.'">';
     $html .= '<input type="text" name="adresseD" class="form-control" placeholder="adresseD" value="'.$this->candidatures->adresseD.'">';
-    $html .= '<button class="btn" value="modifierCandidature">Modifier la candidature</button>';
+    $html .= '<button class="btn" value="validerModification">Valider la modification</button>';
     $html .= '</form>';
-    $html .= '<form method="GET" action= "">';
+    $html .= '<form method="POST" action= "'.$suppimerC.'">';
     $html .= '<button class="btn" value="supprimerCandidature">Supprimer la candidature</button>';
     $html .= '</form>';
     $html .= '</div></div>';
@@ -91,7 +94,7 @@ class VueCandidature{
     switch($param){
       case 'CANDIDATURES':{
         $contenu = $this->afficheToutesCandidatures();
-        $path = "../../";
+        $path = "../";
         break;
       }
       case 'CANDIDATURE' : {
@@ -115,8 +118,7 @@ class VueCandidature{
     <meta name="author" content="">
 
     <title>$title</title>
-    <link rel="stylesheet" href="$path./src/css/bootstrap.min.css">
-    <link rel="stylesheet" href="$path./src/css/principale.css">
+    <link rel="stylesheet" href="$path./css/bootstrap.min.css">
   </head>
 
   <body>

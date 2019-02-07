@@ -46,7 +46,7 @@ class VueConnexion{
                 break;
             }
             case "invite": {
-                //TODO : IMPLEMENTER LA VUE DE SELECTION DU PROFIL
+                $contenu = $this->invites();
                 break;
             }
         }
@@ -84,7 +84,7 @@ END;
         
         $html = <<<END
         <form method="POST" action="$inscription">
-            <img class="mb-2" src="./img/favicon.png" alt="" width="320" height="150">
+            <img class="mb-2" src="./img/logo.png" alt="" width="320" height="150">
             <h1>Inscription</h1>
             <p><input type="text" name="prenom" class="form-control" aria-describedby="emailHelp" placeholder="Prénom" required></p>
             <p><input type="text" name="nom" class="form-control" aria-describedby="emailHelp" placeholder="Nom" required></p>
@@ -105,7 +105,7 @@ END;
             
         $html = <<<END
         <form class="form-signin" method="POST" action="$connexion">
-            <img class="mb-5" src="./img/favicon.png" alt="" width="320" height="150">
+            <img class="mb-5" src="./img/logo.png" alt="" width="320" height="150">
             <h1>Connexion</h1>
             <p><input required type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse mail"></p>
             <p><input type="password" name="pass" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
@@ -116,4 +116,10 @@ END;
 END;
         return $html;
     }
+    
+    /*public function invites() {
+        for($this->data as $value) {
+            
+        }
+    }*/
 }

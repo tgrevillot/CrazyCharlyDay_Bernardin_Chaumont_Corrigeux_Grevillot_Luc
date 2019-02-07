@@ -13,8 +13,8 @@ class ContOffre{
   }
 
   function creerOffre($nom,$employeur,$profil,$duree,$lieu,$etat,$cat){
-    $o = new Offre();
-    $o->nom = $nom
+    $o = new m\Offre();
+    $o->nom = $nom;
     $o->idEmployeur = $employeur;
     $o->profil = $profil;
     $o->duree = $duree;
@@ -22,7 +22,7 @@ class ContOffre{
     $o->etat = $etat;
     $o->idCategorie = $cat;
     $o->save();
-    $vue = new v\VueOffre([$o]);
+    $vue = new v\VueOffre([$o,$employeur]);
     $vue->render(2);
   }
 
