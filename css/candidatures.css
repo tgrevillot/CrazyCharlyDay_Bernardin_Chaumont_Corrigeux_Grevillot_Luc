@@ -1,0 +1,11 @@
+h1 {
+    margin-top: 0.6em;
+}
+
+.listecand {
+    margin-top: 8em;
+}
+
+.listecand > li {
+    font-size: 2em;
+}

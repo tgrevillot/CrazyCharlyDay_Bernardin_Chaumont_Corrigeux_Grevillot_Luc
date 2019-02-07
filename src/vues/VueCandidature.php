@@ -23,7 +23,7 @@ class VueCandidature{
 
     $html .= '<div class="row">';
     $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
-    $html .= '<ul>';
+    $html .= '<ul class="listecand">';
 
     $html .= '<li>'.$this->candidatures->etat.'</li>';
     $html .= '<li>'.$this->candidatures->description.'</li>';
@@ -46,7 +46,7 @@ class VueCandidature{
 
     $html .= '<div class="row">';
     $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
-    $html .= '<ul>';
+    $html .= '<ul class="listecand">';
 
     $html .= '<li>'.$this->candidatures->etat.'</li>';
     $html .= '<li>'.$this->candidatures->description.'</li>';
@@ -71,7 +71,7 @@ class VueCandidature{
     $html = '<div class="container">';
 
     $html .= '<div class="row">';
-    $html .= '<h1>Candidature de l\'utilisateur '.$this->utilisateur->id.'</h1>';
+    $html .= '<h1 class="titreCand">Candidatures de l\'utilisateur '.$this->utilisateur->id.'</h1>';
     $html .= '<ul>';
 
     if(isset($this->candidatures)){
@@ -121,6 +121,7 @@ class VueCandidature{
                     <title>$title</title>
                     <link rel="stylesheet" href="$path./css/bootstrap.min.css">
                     <link rel="stylesheet" href="$path./css/accueil.css">
+                    <link rel="stylesheet" href="$path./css/candidatures.css">
                 </head>
 
                 <body>
