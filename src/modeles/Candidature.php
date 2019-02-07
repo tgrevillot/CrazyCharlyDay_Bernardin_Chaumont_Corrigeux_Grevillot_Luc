@@ -14,6 +14,10 @@ class Candidature extends Model{
     return $this->belongsTo('\justjob\modeles\Offre','idOffre');
   }
 
+  public function transport() {
+      $this->belongsTo("\justjob\modeles\Transport", 'idTransport');
+  }
+
   public function utilisateur(){
     return $this->belongsTo('\justjob\modeles\utilisateur','id');
   }
