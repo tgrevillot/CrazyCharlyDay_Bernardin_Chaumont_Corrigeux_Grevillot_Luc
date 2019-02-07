@@ -54,12 +54,8 @@ $app->get('/formInscription',function(){
     $v->render("");
 })->name('formInscription');
 
-<<<<<<< HEAD
-=======
 $app->get('/accueil', function() {
     //$v = new VueAccueil();
     //$v->render();
 })->name('accueil');
-
->>>>>>> eb0f121ea687da48dfa7a76c6ea9fda0994bb935
 $app->run();
