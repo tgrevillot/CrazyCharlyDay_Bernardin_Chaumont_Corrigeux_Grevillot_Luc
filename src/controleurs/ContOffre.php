@@ -37,7 +37,7 @@ class ContOffre {
       $employeur = m\Utilisateur::find($offre['id']);
 
       $vue = new v\VueOffre([$offre, $employeur]);
-      $vue->render(v\VueOffre::AFFICHER_DETAIL);
+      echo $vue->render(v\VueOffre::AFFICHER_DETAIL);
     } else
       $this->goBackToHome();
   }
@@ -47,7 +47,7 @@ class ContOffre {
       $categorie = m\Categorie::where('nom', '=', $cat)->first();
       $offres = m\Offre::where('idCategorie', '=', $categorie->id)->get();
       $vue = new v\VueOffre([$offres, $categorie]);
-      $vue->render(v\VueOffre::AFFICHER_OFFRES);
+      echo $vue->render(v\VueOffre::AFFICHER_OFFRES);
     } else
         $this->goBackToHome();
   }
@@ -57,7 +57,7 @@ class ContOffre {
       $offres = m\Offre::all();
 
       $vue = new v\VueOffre([$offres]);
-      $vue->render(v\VueOffre::AFFICHER_OFFRES);
+      echo $vue->render(v\VueOffre::AFFICHER_OFFRES);
     } else
       $this->goBackToHome();
   }
@@ -66,7 +66,7 @@ class ContOffre {
     if(ControleAuthentification::checkRight(ControleAuthentification::ROLE_EMPLOYEUR)) {
       $offres = m\Offre::where('idEmployeur', '=', $_SESSION['profile']['id'])->get();
       $vue = new v\VueOffre([$offres]);
-      $vue->render(v\VueOffre::AFFICHER_OFFRES);
+      echo $vue->render(v\VueOffre::AFFICHER_OFFRES);
     } else
       $this->goBackToHome();
   }
