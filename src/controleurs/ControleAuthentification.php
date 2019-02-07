@@ -8,11 +8,17 @@
 
 namespace justjob\controleurs;
 use justjob\modeles\Utilisateur as Utilisateur;
+use justjob\vues\VueConnexion;
 
 
 class ControleAuthentification {
     const ROLE_ADMIN = 0, ROLE_EMPLOYEUR = 1, ROLE_CANDIDAT = 2;
 
+    /**
+     * Inscris un utilisateur
+     * @return bool
+     *  Vrai si la création du compte a fonctionné
+     */
     public static function createUser() {
         if(isset($_POST)) {
             if(isset($_POST['password'])) {
@@ -47,6 +53,15 @@ class ControleAuthentification {
         return false;
     }
 
+    /**
+     * Connecte un utilisateur
+     * @param $email
+     *      email de l'utilisateur
+     * @param $password
+     *      mot de passe de l'utilisateur
+     * @return bool
+     *      Vrai si la connexion a réussi
+     */
     public static function authenticate($email, $password) {
         if(!isset($_SESSION['profile'])) {
             $hashPassword = Utilisateur::select("password")->where("email", $email)->first();
@@ -64,6 +79,11 @@ class ControleAuthentification {
         }
     }
 
+    /**
+     * Charge les informations du profile dans une variable de session
+     * @param $uid
+     *  id de l'utilisateur
+     */
     public static function loadProfile($uid) {
         try {
             session_destroy();
@@ -77,6 +97,16 @@ class ControleAuthentification {
         $_SESSION['profile']['role'] = $infos->role;
         $_SESSION['profile']['nom'] = $infos->nom;
     }
+
+    /**
+     * Charge la liste des utilisateurs et l'affiche via la vue de connexion
+     */
+    public static function chooseUserAccount() {
+        $listeUser = Utilisateur::all();
+        $vue = new VueConnexion("invite", $listeUser);
+        $vue->render("");
+    }
+
 
 
 }

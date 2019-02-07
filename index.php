@@ -6,6 +6,7 @@ use \justjob\bd\ConnectionDB as ConnectionDB;
 use \justjob\controleurs as c;
 
 use \justjob\vues\VueConnexion as VueConnexion;
+use \justjob\controleurs\ControleAuthentification as ControleAuthentification;
 
 //use \justjob\controleurs\ContCandidature as ContCandidature;
 
@@ -17,8 +18,8 @@ ConnectionDB::start('src/conf/conf.ini');
 $app = new \Slim\Slim();
 
 $app->get("/", function() {
-    $v = new VueConnexion("connexion");
-    echo $v->render("");
+    $v = new VueConnexion("connexion", null);
+    $v->render("");
 })->name('formConnexion');
 
 $app->get('/candidatures/:id',function($id){
@@ -26,6 +27,16 @@ $app->get('/candidatures/:id',function($id){
     $c->afficherTout($id);
 });
 
+
+$app->get("/chooseAccount", function() {
+    ControleAuthentification::chooseUserAccount();
+})->name("inviteChooseAccount");
+
+$app->get("/connectAs/:uid", function($uid) {
+    ControleAuthentification::loadProfile($uid);
+    //TODO : REDIRIGER VERS LA PAGE ACCUEIL :
+    //$app->redirectTo("nomDeLaRoute");
+})->name("connectAs");
 
 $app->get('/candidature/:id/:token',function($id,$token){
     $c = new c\ContCandidature();
@@ -39,15 +50,15 @@ $app->get('/modifierCandidature/:id/:token',function($id,$token){
 })->name('modifierCandidature');
 
 $app->get('/formInscription',function(){
-    $v = new VueConnexion("inscription");
-    echo $v->render("");
+    $v = new VueConnexion("inscription", null);
+    $v->render("");
 })->name('formInscription');
 
 <<<<<<< HEAD
 =======
 $app->get('/accueil', function() {
-    $v = new VueAccueil(),
-    echo $v->render();
+    //$v = new VueAccueil();
+    //$v->render();
 })->name('accueil');
 
 >>>>>>> eb0f121ea687da48dfa7a76c6ea9fda0994bb935

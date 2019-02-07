@@ -2,10 +2,11 @@
 namespace justjob\vues;
 
 class VueConnexion{
-    protected $typepage;
+    protected $typepage, $data;
     
-    public function __construct($type){
+    public function __construct($type, $data){
         $this->typepage=$type;
+        $this->data = $data;
     }
     
     public function render($erreur){
@@ -39,6 +40,10 @@ class VueConnexion{
             }
             case "inscription":{
                 $contenu = $this->inscription();
+                break;
+            }
+            case "invite": {
+                //TODO : IMPLEMENTER LA VUE DE SELECTION DU PROFIL
                 break;
             }
         }
