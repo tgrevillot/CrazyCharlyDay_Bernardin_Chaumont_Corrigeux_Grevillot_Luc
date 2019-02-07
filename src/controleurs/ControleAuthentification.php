@@ -33,11 +33,11 @@ class ControleAuthentification {
                         $utilisateur = new Utilisateur();
                         $utilisateur->nom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
                         $utilisateur->prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
+                        $utilisateur->pseudo = filter_var($_POST['pseudo'], FILTER_SANITIZE_STRING);
                         $utilisateur->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
                         $utilisateur->password = $passHache;
                         //TODO : RAMENER LA COUPE A LA MAISON
                         //TODO : IMPLEMENTER LES ROLES DE TOUT A CHACUN
-                        $utilisateur->save();
                         try {
                             if (!$utilisateur->email)
                                 throw new \ErrorException();
@@ -45,6 +45,7 @@ class ControleAuthentification {
                             echo("Erreur lors de la creation de votre compte : l'Email fournit est incorrect");
                             return false;
                         }
+                        $utilisateur->save();
                         return true;
                     }
                 }
@@ -63,20 +64,16 @@ class ControleAuthentification {
      *      Vrai si la connexion a réussi
      */
     public static function authenticate($email, $password) {
-        if(!isset($_SESSION['profile'])) {
             $hashPassword = Utilisateur::select("password")->where("email", $email)->first();
             if(!is_null($hashPassword)) {
                 if(password_verify($password, $hashPassword->password)) {
                     $user_id = Utilisateur::select("id")->where("email", $email)->first();
-                    self::loadprofile($user_id);
+                    self::loadprofile($user_id->id);
                     return true;
-                }
-
+                }else
+                    return false;
             }
             return false;
-        } else {
-            return true;
-        }
     }
 
     /**
@@ -91,8 +88,10 @@ class ControleAuthentification {
             echo "La session n'a pas été détruite car elle n'existait pas !";
         }
         session_start();
-        $infos = Utilisateur::select('nom', 'prenom', 'role')->where('user_id', $uid)->first();
-        $_SESSION['profile']['user_id'] = $uid;
+        $infos = Utilisateur::select('nom', 'prenom', 'role')->where('id', '=', $uid)->first();
+
+
+        $_SESSION['profile']['id'] = $uid;
         $_SESSION['profile']['prenom'] = $infos->prenom;
         $_SESSION['profile']['role'] = $infos->role;
         $_SESSION['profile']['nom'] = $infos->nom;

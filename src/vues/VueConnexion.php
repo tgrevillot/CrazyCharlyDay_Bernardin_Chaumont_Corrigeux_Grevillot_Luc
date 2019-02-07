@@ -28,6 +28,9 @@ class VueConnexion{
                 $err='<p class=erreur>Votre mot de passe doit contenir au moins 6 caractères dont au moins une majuscule, une minuscule et un chiffre !</p>';
                 break;
             }
+            case "ER_INSCRIPTION":
+                $err='<p class=\"erreur\">Inscription impossible</p>';
+                break;
         }
         
         $contenu ="<h1>Erreur de contenu</h1>";
@@ -77,8 +80,7 @@ END;
     public function inscription(){
         $app = \Slim\Slim::getInstance();
         $lienConnec = $app->urlFor('formConnexion');
-        //$inscription = $app->urlFor('insriptionPost');
-        $inscription = "";
+        $inscription = $app->urlFor('inscription');
         
         $html = <<<END
         <form method="POST" action="$inscription">
@@ -99,14 +101,13 @@ END;
     public function connexion(){
         $app = \Slim\Slim::getInstance();
         $lien=$app->urlFor('formInscription');
-        //$connexion = $app->urlFor('connexionPost');
-        $connexion = "";
+        $connexion = $app->urlFor("connexion");
             
         $html = <<<END
         <form class="form-signin" method="POST" action="$connexion">
             <img class="mb-5" src="./img/favicon.png" alt="" width="320" height="150">
             <h1>Connexion</h1>
-            <p><input required type="email" name="mail" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="Adresse mail"></p>
+            <p><input required type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse mail"></p>
             <p><input type="password" name="pass" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
             <a href=$lien><p class="text-muted">S'inscrire.</p></a>
             <p><button type="submit" class="btn btn-primary" name="connexion" value="connec">Connexion</button></p>
