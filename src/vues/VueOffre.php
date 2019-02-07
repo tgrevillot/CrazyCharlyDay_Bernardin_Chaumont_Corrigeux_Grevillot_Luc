@@ -4,14 +4,14 @@ namespace justjob\vues;
 
 class VueOffre{
 
-  $tab;
+  protected $tab;
 
   public function __construct($t = []){
-    $tab = $t
+    $tab = $t;
   }
 
-  function creerOffreForm(){
-    $content = '<form id="form1" method="POST" action="liste">
+  private function creerOffreForm(){
+    $content = '<form id="form1" method="POST" action="">
                   <input type="text" name="nom" placeholder="nom" required>
                   <input type="text" name="employeur" placeholder="employeur" required>
                   <input type="text" name="profil" placeholder="profil" required>
@@ -24,7 +24,7 @@ class VueOffre{
     return $content;
   }
 
-  function afficheDetail(){
+  private function afficheDetail(){
     $offre = $this->tab[0];
     $employeur = $this->tab[1];
     $content = "Offre ".$offre->id."<br>
@@ -34,7 +34,7 @@ class VueOffre{
     return $content;
   }
 
-  function afficherOffres(){
+  private function afficherOffres(){
     $offres = $this->tab[0];
     $content = "";
     /*
@@ -47,7 +47,7 @@ class VueOffre{
     }
     */
     foreach ($offres as $o) {
-      $content = $content."Offre ".$o->id." ".$o->nom."<br>"
+      $content = $content."Offre ".$o->id." ".$o->nom."<br>";
     }
     return $content;
 
@@ -56,12 +56,35 @@ class VueOffre{
   public function render($sel){
     switch($sel){
       case 1:
-        $content = $this->creerOffre();
+        $content = $this->creerOffreForm();
+        break;
       case 2:
         $content = $this->afficheDetail();
+        break;
       case 3:
         $content = $this->afficherOffres();
+        break;
     }
-  }
+    $html = <<< END
+        <!DOCTYPE HTML>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>Offre</title>
+    <link rel="stylesheet" href="../.././src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../.././src/css/principale.css">
+  </head>
+
+  <body>
+    $content
+  </body>
+  </html>
+END;
+    echo $html;
+  }
+}
 ?>

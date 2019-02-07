@@ -6,7 +6,6 @@ use \justjob\bd\ConnectionDB as ConnectionDB;
 use \justjob\controleurs as c;
 
 use \justjob\vues\VueConnexion as VueConnexion;
-use \justjob\controleurs\ControleAuthentification as ControleAuthentification;
 
 //use \justjob\controleurs\ContCandidature as ContCandidature;
 
@@ -19,24 +18,14 @@ $app = new \Slim\Slim();
 
 $app->get("/", function() {
     $v = new VueConnexion("connexion", null);
-    $v->render("");
+    echo $v->render("");
 })->name('formConnexion');
 
 $app->get('/candidatures/:id',function($id){
     $c = new c\ContCandidature();
     $c->afficherTout($id);
-});
+})->name('candidatures');
 
-
-$app->get("/chooseAccount", function() {
-    ControleAuthentification::chooseUserAccount();
-})->name("inviteChooseAccount");
-
-$app->get("/connectAs/:uid", function($uid) {
-    ControleAuthentification::loadProfile($uid);
-    //TODO : REDIRIGER VERS LA PAGE ACCUEIL :
-    //$app->redirectTo("nomDeLaRoute");
-})->name("connectAs");
 
 $app->get('/candidature/:id/:token',function($id,$token){
     $c = new c\ContCandidature();
@@ -49,13 +38,54 @@ $app->get('/modifierCandidature/:id/:token',function($id,$token){
     $c->modifierCandidature($id,$token);
 })->name('modifierCandidature');
 
+$app->post('/modifierCandidature/:id/:token',function($id,$token){
+  $c = new c\ContCandidature();
+  $c->modifierCandidatureValide($id,$token);
+})->name('validerModification');
+
+$app->post('/supprimerCandidature/:id/:token',function($id,$token){
+  $c = new c\ContCandidature();
+  $c->supprimerCandidature($id,$token);
+})->name('supprimerCandidature');
+
 $app->get('/formInscription',function(){
-    $v = new VueConnexion("inscription", null);
-    $v->render("");
+    $v = new VueConnexion("inscription");
+    echo $v->render("");
 })->name('formInscription');
 
 $app->get('/accueil', function() {
-    //$v = new VueAccueil();
-    //$v->render();
+    $v = new VueAccueil();
+    echo $v->render();
 })->name('accueil');
+
+$app->get('/creerOffre', function(){
+  $c = new c\ContOffre();
+  $c->creerOffreForm();
+});
+
+$app->post('/creerOffre', function(){
+  $c = new c\ContOffre();
+  $c->creerOffre($_POST['nom'],$_POST['employeur'],$_POST['profil'],$_POST['duree'],$_POST['lieu'],$_POST['etat'],$_POST['cat']);
+});
+
+$app->get('/afficherDetailOffre/:id', function($id){
+  $c = new c\ContOffre();
+  $c->afficheDetail($id);
+});
+
+$app->get('/afficherOffresCat/:cat', function($cat){
+  $c = new c\ContOffre();
+  $c->afficherOffresCat($cat);
+});
+
+$app->get('/afficherOffres', function(){
+  $c = new c\ContOffre();
+  $c->afficherOffres();
+});
+
+$app->get('/afficherOffresEmployeur/:employeur', function($employeur){
+  $c = new c\ContOffre();
+  $c->creerOffreForm($employeur);
+});
+
 $app->run();
