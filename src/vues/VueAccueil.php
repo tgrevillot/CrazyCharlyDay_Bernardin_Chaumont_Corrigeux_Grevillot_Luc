@@ -2,34 +2,33 @@
 
 class VueAccueil {
     
+    protected $typepage, $data;
     
+    public function __construct($type, $data){
+        $this->typepage=$type;
+        $this->data = $data;
+    }
     
-    
-    
-    public function afficherPageDaccueil() {
-        //Lien vers une page avec paramètres :
-        //$lien = $this->slim->urlFor("nomRoute", array("nomParametre" => 1, "nomParametre2" => "truc"));
-        $lienAccueil = $this->slim->urlFor("Accueil");
-
-        $page = <<< EOF
-            <div class="header">
-                <h2 class="logo">justJob</h2>
-                <input type="checkbox" id="chk">
-                <label for="chk" class="show-menu-btn">
-                    <i class="fas fa-ellipsis-h"></i>
-                </label>
+    public function render(){
+        switch($this->typepage){
+            case "accueilAdmin":{
+                $contenu = this->affichageAdmin();
+                break;
+            }
             
-                <ul class="menu">
-                    <a href="$lienAccueil">Accueil</a>
-                    <a href="map.php">Offres</a>
-                    <a href="#">a completer</a>
-                    <a href="#">Compte</a>
-                    <a href="deconnexion.php">Deconnexion</a>
-                    <label for="chk" class="hide-menu-btn">
-                        <i class="fas fa-times"></i>
-                    </label>
-                </ul>
-            </div>
-EOF;
-    return $page
+            case "accueilEmploye":{
+                $contenu = this->affichageEmploye();
+                break;
+            }
+                
+            case "accueilEmployeur":{
+                $contenu = this->afficageEmployeur();
+                break;
+            }
+        }
+        
+        
+        
+        
+    }
 }
