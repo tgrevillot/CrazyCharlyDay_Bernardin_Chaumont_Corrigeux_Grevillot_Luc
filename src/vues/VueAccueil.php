@@ -2,9 +2,32 @@
 
 namespace justjob\vues;
 
-class VueAccueil {   
+class VueAccueil {
     
+    protected $typepage, $data;
     
+    public function __construct($type, $data){
+        $this->typepage=$type;
+        $this->data = $data;
+    }
+    
+    public function render(){
+        switch($this->typepage){
+            case "accueilAdmin":{
+                $contenu = this->affichageAdmin();
+                break;
+            }
+            
+            case "accueilEmploye":{
+                $contenu = this->affichageEmploye();
+                break;
+            }
+            case "accueilEmployeur":{
+                $contenu = this->affichageEmployeur();
+                break;
+            }
+        }
+    }
     public function afficherPageDaccueil() {
         //Lien vers une page avec paramètres :
         //$lien = $this->slim->urlFor("nomRoute", array("nomParametre" => 1, "nomParametre2" => "truc"));
@@ -18,17 +41,17 @@ class VueAccueil {
                     <i class="fas fa-ellipsis-h"></i>
                 </label>
             
-                <ul class="menu">
-                    <a href="$lienAccueil">Accueil</a>
-                    <a href="map.php">Offres</a>
-                    <a href="#">a completer</a>
-                    <a href="#">Compte</a>
-                    <a href="deconnexion.php">Deconnexion</a>
-                    <label for="chk" class="hide-menu-btn">
-                        <i class="fas fa-times"></i>
-                    </label>
-                </ul>
-            </div>
+            case "accueilEmploye":{
+                $contenu = this->affichageEmploye();
+                break;
+            }
+                
+            case "accueilEmployeur":{
+                $contenu = this->afficageEmployeur();
+                break;
+            }
+        }
 EOF;
-    return $page
+        return $page;
+    }
 }
