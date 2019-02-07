@@ -1,9 +1,8 @@
 <?php
 
-class VueAccueil {
-    
-    
-    
+namespace justjob\vues;
+
+class VueAccueil {   
     
     
     public function afficherPageDaccueil() {
