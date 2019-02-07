@@ -30,8 +30,8 @@ class VueConnexion{
         }
         
         $contenu ="<h1>Erreur de contenu</h1>";
-        $style="<link rel='stylesheet'  href='./src/css/bootstrap.min.css'/>
-                <link rel='stylesheet'  href='./src/css/Connexion.css'/>";
+        $style="<link rel='stylesheet'  href='./css/bootstrap.min.css'/>
+                <link rel='stylesheet'  href='./css/Connexion.css'/>";
         switch($this->typepage){
             case "connexion":{
                 $contenu = $this->connexion();
@@ -47,9 +47,9 @@ class VueConnexion{
         <!DOCTYPE html>
         <html>
             <head>
-            <link rel="icon" href="./src/img/favicon.png">
+            <link rel="icon" href="./img/favicon.png">
                 <meta charset="utf-8">
-                  <title>Connexion/Inscription</title>
+                  <title>Authentification</title>
                     $style
             </head>
             <body class="text-center">
@@ -69,7 +69,7 @@ END;
         echo $html;
     }   
     
-    public function inscription(){
+    /*public function inscription(){
         $app = \Slim\Slim::getInstance();
         $lienConnec = $app->urlFor('connexion');
         $inscription = $app->urlFor('insriptionPost');
@@ -106,16 +106,18 @@ END;
                             </form>
 END;
         return $html;
-    }
+    }*/
     
     public function connexion(){
         $app = \Slim\Slim::getInstance();
-        $lien=$app->urlFor('Inscription');
-        $connexion = $app->urlFor('connexionPost');
+        //$lien=$app->urlFor('Inscription');
+        $lien = "";
+        //$connexion = $app->urlFor('connexionPost');
+        $connexion = "";
             
         $html = <<<END
          <form class="form-signin" method="POST" action="$connexion">
-                            <img class="mb-5" src="./src/img/logo.png" alt="" width="160" height="72">
+                            <img class="mb-5" src="./img/logo.png" alt="" width="160" height="72">
                             <h1>Connexion</h1>
                              <p>
                                     <input required type="email" name="mail" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="Votre adresse mail">
@@ -123,7 +125,7 @@ END;
                                 <p>
                                    <input type="password" name="pass" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="Mot de passe" required>
                                 </p>
-                                    <a href=$lien><p class="text-muted">Pas de compte ? S'inscrire.</p></a>
+                                    <a href=$lien><p class="text-muted">Vous n'avez pas de compte ? Inscrivez-vous !</p></a>
                                 <p>
                                     <button type="submit" class="btn btn-primary" name="connexion" value="connec">Connexion</button>
                                 </p>
