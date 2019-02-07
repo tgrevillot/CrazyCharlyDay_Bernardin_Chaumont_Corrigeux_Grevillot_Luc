@@ -45,3 +45,11 @@
 
 ### Affichage et modification d'une candidature pour un employeur
 - *Un employeur peut modifier l'état d'une candidature*
+
+## *Gestion des comptes*
+
+### Déconnexion d'un utilisateur
+- *L'utilisateur peut se déconnecter de son profil*
+
+### Affichage du compte
+- *L'utilisateur peut avoir accès aux informations de son compte*

@@ -85,9 +85,17 @@ form{
     text-align: center;
 }
 
-p{
+p {
     text-align: center;
     padding-top: 25px;
     margin-left: 10px;
     margin-right: 10px;
+}
+.list-group-item:hover {
+    background-color: rgb(255, 169, 43);
+}
+
+.btncandidater {
+    margin-top: 15px;
+    margin-left: 10px;
 }

@@ -28,16 +28,21 @@ class VueOffre{
   private function afficheDetail(){
     $offre = $this->tab[0];
     $employeur = $this->tab[1];
-    $content = "Offre ".$offre['id']."<br>
-    Employeur : ".$employeur['nom']."<br>
-    Profil recherché :<br>".$offre['profil']."<br><br>".$offre['duree']."<br>
-    Lieu : ".$offre['lieu'];
+    $content = <<<END
+    <div class="list-group">
+        <p class="list-group-item list-group-item-action active">Employeur : $employeur[nom]</p>
+        <p class="list-group-item list-group-item-action">Profil recherché : $offre[profil]</p>
+        <p class="list-group-item list-group-item-action">Durée : $offre[duree]</p>
+        <p class="list-group-item list-group-item-action">Lieu : $offre[lieu]</p>
+        <p><button class="btncandidater btn btn-primary">Candidater</button></p>
+    </div>
+END;
     return $content;
   }
 
   private function afficherOffres(){
     $offres = $this->tab[0];
-    $content = "";
+
     /*
     if(isset($this->tab[1])){
       if($this->tab[1] instanceof Categorie){
@@ -49,47 +54,95 @@ class VueOffre{
     */
     $app =\Slim\Slim::getInstance();
 
+      $content = <<<END
+      <div class="list-group">
+END;
+
     foreach($offres as $value){
-      $url = $app->urlFor('afficherOffreById',["id" =>$value->id] ) ;
-      $content = $content."Offre <a href='$url'>$value->id</a><br><br> $value->nom<br>";
+        $url = $app->urlFor('afficherOffreById',["id" =>$value->id] ) ;
+        $content .= <<<END
+        <a href="$url" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Offre $value->id</h5>
+            </div>
+            <p class="mb-1">$value->nom</p>
+        </a>
+END;
     }
+      $content .= "</div>";
 
     return $content;
 
   }
 
   public function render($sel){
+    $app = \Slim\Slim::getInstance();
+    $path = "";
     switch($sel){
       case self::CREER_OFFRE:
         $content = $this->creerOffreForm();
+        $path = "../";
         break;
       case self::AFFICHER_DETAIL:
         $content = $this->afficheDetail();
+        $path = "../";
         break;
       case self::AFFICHER_OFFRES:
         $content = $this->afficherOffres();
+        $path = "";
         break;
     }
-    $html = <<< END
-        <!DOCTYPE HTML>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        $lienAccueil = $app->urlFor("accueil");
 
-    <title>Offre</title>
-    <link rel="stylesheet" href="../.././src/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../.././src/css/principale.css">
-  </head>
+        $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
+        $lienOffre = $app->urlFor("afficherOffres");
+        $lienCompte = $app->urlFor("compte",array('id' => $_SESSION['profile']['id']));
+        $lienCovoiturage = $app->urlFor("viewCovoiturage");
 
-  <body>
-    $content
-  </body>
-  </html>
+        $html = <<<END
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="utf-8">
+                <link rel="icon" href="$path./img/favicon.png">
+                <title>Offres d'emploi</title>
+                <link rel='stylesheet' href='$path./css/bootstrap.min.css'/>
+                <link rel='stylesheet' href='$path./css/accueil.css'/>
+            </head>
+
+            <body>
+                <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                    <a class="navbar-brand" href="$lienAccueil">
+                    <img class="logo" src="$path./img/logo.png" width="120" height="50" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <form class="form-inline my-2 my-md-0 method="GET" action="">
+                        <input class="form-control" type="text" name="search" placeholder="Rechercher">
+                    </form>
+                    <div class="collapse navbar-collapse" id="navbarsExample04">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienCandidature">Candidatures<span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="nav-item " href=$lienCompte>
+                        <img src="$path./img/profil.png" width="40" height="40" alt="">
+                    </a>
+                </nav>
+                $content
+            </body>
 END;
-    echo $html;
+        return $html;
   }
 }
 ?>

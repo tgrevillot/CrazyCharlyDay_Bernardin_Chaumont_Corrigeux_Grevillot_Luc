@@ -4,31 +4,26 @@ namespace justjob\vues;
 
 class VueAccueil {
 
-    public function __construct(){}
+  private $utilisateur, $app;
+
+  public function __construct($tab = array()){
+
+    if(isset($tab['utilisateur'])){
+      $this->utilisateur = $tab['utilisateur'];
+    }
+
+    $this->app = \Slim\Slim::getInstance();
+  }
 
     public function render(){
         $app = \Slim\Slim::getInstance();
-
-        /*switch(){
-            case "accueilAdmin":{
-                $contenu = $this->affichageAdmin();
-                break;
-            }
-
-            case "accueilEmploye":{
-                $contenu = $this->affichageEmploye();
-                break;
-            }
-            case "accueilEmployeur":{
-                $contenu = $this->affichageEmployeur();
-                break;
-            }
-        }*/
 
         $lienAccueil = $app->urlFor("accueil");
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
+        $lienCovoiturage = $app->urlFor("viewCovoiturage");
+        $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
 
         $html = <<<END
         <!DOCTYPE html>
@@ -61,9 +56,12 @@ class VueAccueil {
                             <li class="nav-item active">
                                 <a class="nav-link" href="$lienOffre">Offres d'emploi<span class="sr-only">(current)</span></a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
+                            </li>
                         </ul>
                     </div>
-                    <a class="nav-item " href=>
+                    <a class="nav-item " href=$lienCompte>
                         <img src="./img/profil.png" width="40" height="40" alt="">
                     </a>
                 </nav>
@@ -82,7 +80,7 @@ class VueAccueil {
                  </div>
             </body>
 END;
-        return $html;
+        echo $html;
     }
 
     public function afficherPageDaccueil() {
@@ -97,17 +95,6 @@ END;
                 <label for="chk" class="show-menu-btn">
                     <i class="fas fa-ellipsis-h"></i>
                 </label>
-
-            case "accueilEmploye":{
-                $contenu = this->affichageEmploye();
-                break;
-            }
-
-            case "accueilEmployeur":{
-                $contenu = this->afficageEmployeur();
-                break;
-            }
-        }
 EOF;
         return $page;
     }
