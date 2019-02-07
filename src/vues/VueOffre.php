@@ -5,9 +5,10 @@ namespace justjob\vues;
 class VueOffre{
 
   protected $tab;
+  const CREER_OFFRE = 1, AFFICHER_DETAIL = 2, AFFICHER_OFFRES = 3;
 
   public function __construct($t = []){
-    $tab = $t;
+    $this->tab = $t;
   }
 
   private function creerOffreForm(){
@@ -36,7 +37,6 @@ class VueOffre{
 
   private function afficherOffres(){
     $offres = $this->tab[0];
-    var_dump($offres);
     $content = "";
     /*
     if(isset($this->tab[1])){
@@ -48,19 +48,19 @@ class VueOffre{
     }
     */
     $app =\Slim\Slim::getInstance();
-    /*
+
     foreach($offres as $value){
-      $url = $app->urlFor('afficheItemsListe',[$value->id] ) ;
+      $url = $app->urlFor('afficherOffreById',["id" =>$value->id] ) ;
       $content = $content."Offre <a href='$url'>$value->id</a><br><br> $value->nom<br>";
     }
-    */
+
     return $content;
 
   }
 
   public function render($sel){
     switch($sel){
-      case 1:
+      case self::CREER_OFFRE:
         $content = $this->creerOffreForm();
         break;
       case 2:

@@ -26,6 +26,7 @@ class VueAccueil {
         }*/
         
         $lienAccueil = $app->urlFor("accueil");
+
         
         $html = <<<END
         <!DOCTYPE html>

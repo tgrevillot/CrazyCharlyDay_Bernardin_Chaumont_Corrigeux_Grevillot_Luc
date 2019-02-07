@@ -110,6 +110,18 @@ class ControleAuthentification {
         $vue->render("");
     }
 
+    public static function checkRight($required) {
+        return isset($_SESSION['profile']) && $_SESSION['profile']['role'] >= $required;
+    }
 
+    public static function logout() {
+        try {
+            session_destroy();
+        }catch(\Exception $e) {
+
+        }
+        $app = \Slim\Slim::getInstance();
+        $app->redirectTo("/");
+    }
 
 }

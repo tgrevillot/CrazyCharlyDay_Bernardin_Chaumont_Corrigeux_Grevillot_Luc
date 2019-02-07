@@ -21,39 +21,38 @@ $app->get("/", function() {
     echo $v->render("");
 })->name('formConnexion');
 
+/****Candidature*****/
 $app->get('/candidatures/:id',function($id){
     $c = new c\ContCandidature();
     $c->afficherTout($id);
 })->name('candidatures');
-
-//Envoie la liste des utilisateurs disponibles
-$app->get("/chooseAccount", function() {
-    ControleAuthentification::chooseUserAccount();
-})->name("inviteChooseAccount");
 
 $app->get('/candidature/:id/:token',function($id,$token){
     $c = new c\ContCandidature();
     $c->afficherCandidature($id,$token);
 })->name('afficherCandidature');
 
-
 $app->get('/modifierCandidature/:id/:token',function($id,$token){
     $c = new c\ContCandidature();
     $c->modifierCandidature($id,$token);
 })->name('modifierCandidature');
 
+$app->post('/supprimerCandidature/:id/:token',function($id,$token){
+    $c = new c\ContCandidature();
+    $c->supprimerCandidature($id,$token);
+})->name('supprimerCandidature');
 
 //Envoie le formulaire d'inscription
 $app->post('/modifierCandidature/:id/:token',function($id,$token){
-  $c = new c\ContCandidature();
-  $c->modifierCandidatureValide($id,$token);
+    $c = new c\ContCandidature();
+    $c->modifierCandidatureValide($id,$token);
 })->name('validerModification');
 
-$app->post('/supprimerCandidature/:id/:token',function($id,$token){
-  $c = new c\ContCandidature();
-  $c->supprimerCandidature($id,$token);
-})->name('supprimerCandidature');
-
+/*******Authentification*********/
+//Envoie la liste des utilisateurs disponibles
+$app->get("/chooseAccount", function() {
+    ControleAuthentification::chooseUserAccount();
+})->name("inviteChooseAccount");
 
 $app->get('/formInscription',function(){
     $v = new v\VueConnexion("inscription", null);
@@ -87,6 +86,8 @@ $app->get('/accueil', function() {
     echo $v->render();
 })->name('accueil');
 
+/************Offres**************/
+
 $app->get('/creerOffre', function(){
   $c = new c\ContOffre();
   $c->creerOffreForm();
@@ -100,21 +101,24 @@ $app->post('/creerOffre', function(){
 $app->get('/afficherDetailOffre/:id', function($id){
   $c = new c\ContOffre();
   $c->afficheDetail($id);
-})->name('offre');
+})->name('afficherOffreById');
 
 $app->get('/afficherOffresCat/:cat', function($cat){
   $c = new c\ContOffre();
   $c->afficherOffresCat($cat);
-});
+})->name("afficherOffresByCat");
 
 $app->get('/afficherOffres', function(){
   $c = new c\ContOffre();
   $c->afficherOffres();
-});
+})->name("afficherOffres");
 
-$app->get('/afficherOffresEmployeur/:employeur', function($employeur){
+$app->get('/afficherOffresEmployeur/', function(){
   $c = new c\ContOffre();
-  $c->creerOffreForm($employeur);
-});
+  $c->afficherOffresEmployeur();
+})->name("afficherOffreEmployeur");
+
+
+/*********Covoiturage**********/
 
 $app->run();
