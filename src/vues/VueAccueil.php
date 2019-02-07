@@ -3,18 +3,18 @@
 namespace justjob\vues;
 
 class VueAccueil {
-    
+
     public function __construct(){}
-    
+
     public function render(){
         $app = \Slim\Slim::getInstance();
-        
+
         /*switch(){
             case "accueilAdmin":{
                 $contenu = $this->affichageAdmin();
                 break;
             }
-            
+
             case "accueilEmploye":{
                 $contenu = $this->affichageEmploye();
                 break;
@@ -24,9 +24,10 @@ class VueAccueil {
                 break;
             }
         }*/
-        
+
         $lienAccueil = $app->urlFor("accueil");
-        
+        $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
+
         $html = <<<END
         <!DOCTYPE html>
         <html>
@@ -37,7 +38,7 @@ class VueAccueil {
                 <link rel='stylesheet'  href='./css/bootstrap.min.css'/>
                 <link rel='stylesheet'  href='./css/accueil.css'/>
             </head>
-            
+
             <body>
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                     <a class="navbar-brand" href="$lienAccueil">
@@ -48,11 +49,11 @@ class VueAccueil {
                     </button>
                     <form class="form-inline my-2 my-md-0 method="GET" action="">
                         <input class="form-control" type="text" name="search" placeholder="Rechercher">
-                    </form> 
+                    </form>
                     <div class="collapse navbar-collapse" id="navbarsExample04">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="">Candidatures<span class="sr-only">(current)</span>
+                                <a class="nav-link" href="$lienCandidature">Candidatures<span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item active">
@@ -64,11 +65,11 @@ class VueAccueil {
                         <img src="./img/profil.png" width="40" height="40" alt="">
                     </a>
                 </nav>
-            </body>                
+            </body>
 END;
         return $html;
     }
-    
+
     public function afficherPageDaccueil() {
         //Lien vers une page avec paramètres :
         //$lien = $this->slim->urlFor("nomRoute", array("nomParametre" => 1, "nomParametre2" => "truc"));
@@ -81,12 +82,12 @@ END;
                 <label for="chk" class="show-menu-btn">
                     <i class="fas fa-ellipsis-h"></i>
                 </label>
-            
+
             case "accueilEmploye":{
                 $contenu = this->affichageEmploye();
                 break;
             }
-                
+
             case "accueilEmployeur":{
                 $contenu = this->afficageEmployeur();
                 break;
