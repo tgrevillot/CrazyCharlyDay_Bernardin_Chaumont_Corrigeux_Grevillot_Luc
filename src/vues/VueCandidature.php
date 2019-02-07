@@ -137,7 +137,7 @@ class VueCandidature{
     $app = \Slim\Slim::getInstance();
     $lienAccueil = $app->urlFor("accueil");
     $contenu = "<h1>ERREUR !</h1>";
-    $title = "justjob";
+    $title = "Candidatures";
     $path = "";
 
     switch($param){
@@ -174,6 +174,7 @@ class VueCandidature{
                     <link rel="stylesheet" href="$path./css/bootstrap.min.css">
                     <link rel="stylesheet" href="$path./css/accueil.css">
                     <link rel="stylesheet" href="$path./css/candidatures.css">
+                    <link rel="icon" href="$path./img/favicon.png"
                 </head>
 
                 <body>
