@@ -89,7 +89,7 @@ class VueCandidature{
     $path = "";
 
     switch($param){
-      case 'CANDIDATURES' : {
+      case 'CANDIDATURES':{
         $contenu = $this->afficheToutesCandidatures();
         $path = "../../";
         break;
