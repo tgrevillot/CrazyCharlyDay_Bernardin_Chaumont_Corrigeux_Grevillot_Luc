@@ -68,5 +68,4 @@ $app->get('/accueil', function() {
     //$v = new VueAccueil();
     //$v->render();
 })->name('accueil');
-
 $app->run();
