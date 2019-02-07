@@ -28,7 +28,7 @@ class ContOffre{
 
   function afficheDetail($id){
     $offre = m\Offre::find($id);
-    $employeur = m\Utilisateur::where('id','=',$offre->idEmployeur);
+    $employeur = m\Utilisateur::where('id','=',$offre->idEmployeur)->first();
     $vue = new v\VueOffre([$offre,$employeur]);
     $vue->render(2);
   }
@@ -47,7 +47,7 @@ class ContOffre{
   }
 
   function afficherOffresEmployeur($id){
-    $offres = m\Offre::where('idEmployeur','=',$id);
+    $offres = m\Offre::where('idEmployeur','=',$id)->get();
     $vue = new v\VueOffre([$offres]);
     $vue->render(3);
   }

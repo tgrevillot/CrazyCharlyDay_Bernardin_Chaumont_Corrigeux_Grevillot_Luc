@@ -71,7 +71,7 @@ $app->post('/creerOffre', function(){
 $app->get('/afficherDetailOffre/:id', function($id){
   $c = new c\ContOffre();
   $c->afficheDetail($id);
-});
+})->name('offre');
 
 $app->get('/afficherOffresCat/:cat', function($cat){
   $c = new c\ContOffre();

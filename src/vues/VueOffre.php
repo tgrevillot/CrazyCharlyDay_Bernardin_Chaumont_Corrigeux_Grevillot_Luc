@@ -46,8 +46,10 @@ class VueOffre{
       }
     }
     */
+    $app =\Slim\Slim::getInstance() ;
     foreach ($offres as $o) {
-      $content = $content."Offre ".$o->id." ".$o->nom."<br>";
+      $url = $app->urlFor('afficheItemsListe',[$o->id] ) ;
+      $content = $content."Offre <a href='$url'>$o->id</a><br><br> $o->nom<br>";
     }
     return $content;
 
