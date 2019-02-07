@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 
 use \justjob\bd\ConnectionDB as ConnectionDB;
+use \justjob\vues\VueConnexion as VueConnexion;
 //use \justjob\controleurs\ContCandidature as ContCandidature;
 
 session_start();
@@ -12,4 +13,9 @@ ConnectionDB::start('src/conf/conf.ini');
 
 $app = new \Slim\Slim();
 
+$app->get("/", function() {
+    $v = new VueConnexion("connexion");
+    echo $v->render("");
+})->name('formConnexion');
+    
 $app->run();
