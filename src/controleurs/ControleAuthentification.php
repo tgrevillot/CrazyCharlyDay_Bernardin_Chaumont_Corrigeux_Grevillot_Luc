@@ -36,8 +36,12 @@ class ControleAuthentification {
                         $utilisateur->pseudo = filter_var($_POST['pseudo'], FILTER_SANITIZE_STRING);
                         $utilisateur->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
                         $utilisateur->password = $passHache;
-                        //TODO : RAMENER LA COUPE A LA MAISON
-                        //TODO : IMPLEMENTER LES ROLES DE TOUT A CHACUN
+                        if(isset($_POST['role'])){
+                          $utilisateur->role = $_POST['role'];
+                        }else{
+                          $utilisateur->role = 0;
+                        }
+
                         try {
                             if (!$utilisateur->email)
                                 throw new \ErrorException();

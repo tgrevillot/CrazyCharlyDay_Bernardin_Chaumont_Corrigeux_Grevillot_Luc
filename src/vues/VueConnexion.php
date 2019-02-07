@@ -3,12 +3,12 @@ namespace justjob\vues;
 
 class VueConnexion{
     protected $typepage, $data;
-    
+
     public function __construct($type, $data){
         $this->typepage=$type;
         $this->data = $data;
     }
-    
+
     public function render($erreur){
         $err="";
         switch($erreur){
@@ -32,7 +32,7 @@ class VueConnexion{
                 $err='<p class=\"erreur\">Inscription impossible</p>';
                 break;
         }
-        
+
         $contenu ="<h1>Erreur de contenu</h1>";
         $style="<link rel='stylesheet'  href='./css/bootstrap.min.css'/>
                 <link rel='stylesheet'  href='./css/connexion.css'/>";
@@ -50,7 +50,7 @@ class VueConnexion{
                 break;
             }
         }
-        
+
         $html =  <<< END
         <!DOCTYPE html>
         <html>
@@ -64,26 +64,26 @@ class VueConnexion{
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-4 justify-content-md-center">
-                        
+
                         $contenu
                         $err
-                        
+
                         </div>
                     </div>
                 </div>
-            </body> 
+            </body>
         </html>
 END;
         echo $html;
-    }   
-    
+    }
+
     public function inscription(){
         $app = \Slim\Slim::getInstance();
         $lienConnec = $app->urlFor('formConnexion');
         $inscription = $app->urlFor('inscription');
-        
+
         $html = <<<END
-        <form method="POST" action="$inscription">
+        <form method="POST" id="inscription" action="$inscription">
             <img class="mb-2" src="./img/logo.png" alt="" width="320" height="150">
             <h1>Inscription</h1>
             <p><input type="text" name="prenom" class="form-control" aria-describedby="emailHelp" placeholder="Prénom" required></p>
@@ -92,18 +92,19 @@ END;
             <p><input type="text" name="pseudo" class="form-control" aria-describedby="emailHelp" placeholder="Pseudo" required></p>
             <p><input type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
             <p><input type="password" name="confirmPass" class="form-control" aria-describedby="emailHelp" placeholder="Confirmer mot de passe" required></p>
-            <div><p><input type="checkbox" value=2 name="candidat" id="candidat">  candidat   <input type="checkbox" value=1 name="employeur" id="employeur">  employeur</p></div>
+            <p><input type="radio" name="role" value="2"> Candidat
+            <input type="radio" name="role" value="1"> Employeur <p>
             <p><a href=$lienConnec><label class="annul btn btn-secondary">Annuler</label></a><button type="submit" class="btn btn-primary" name="inscription" value="inscription">Inscription</button></p>
         </form>
 END;
         return $html;
     }
-    
+
     public function connexion(){
         $app = \Slim\Slim::getInstance();
         $lien=$app->urlFor('formInscription');
         $connexion = $app->urlFor("connexion");
-            
+
         $html = <<<END
         <form class="form-signin" method="POST" action="$connexion">
             <img class="mb-5" src="./img/logo.png" alt="" width="320" height="150">
@@ -117,10 +118,10 @@ END;
 END;
         return $html;
     }
-    
+
     /*public function invites() {
         for($this->data as $value) {
-            
+
         }
     }*/
 }
