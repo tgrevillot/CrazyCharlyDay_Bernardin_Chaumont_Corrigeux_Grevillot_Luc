@@ -75,6 +75,22 @@ form{
     border-color: cornflowerblue;
 }
 
+
+.icone {
+    vertical-align: middle;
+}
+
+.conteneur{
+    padding-top: 9%;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    padding-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .list-group-item:hover {
     background-color: rgb(255, 169, 43);
 }

@@ -32,7 +32,7 @@ class VueUser{
     switch($param){
       case 'COMPTE':{
         $contenu = $this->afficherCompte();
-        $path = "../";
+        $path = "./";
         break;
       }
     }
@@ -89,7 +89,7 @@ class VueUser{
                     $contenu
                 </body>
             </html>
-  END;
+END;
     echo $html;
   }
 }

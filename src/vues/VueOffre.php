@@ -42,7 +42,7 @@ END;
 
   private function afficherOffres(){
     $offres = $this->tab[0];
-    
+
     /*
     if(isset($this->tab[1])){
       if($this->tab[1] instanceof Categorie){
@@ -57,7 +57,7 @@ END;
       $content = <<<END
       <div class="list-group">
 END;
-      
+
     foreach($offres as $value){
         $url = $app->urlFor('afficherOffreById',["id" =>$value->id] ) ;
         $content .= <<<END
@@ -96,6 +96,8 @@ END;
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
+        $lienCompte = $app->urlFor("compte",array('id' => $_SESSION['profile']['id']));
+        $lienCovoiturage = $app->urlFor("viewCovoiturage");
 
         $html = <<<END
         <!DOCTYPE html>
@@ -128,9 +130,12 @@ END;
                             <li class="nav-item active">
                                 <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
+                            </li>
                         </ul>
                     </div>
-                    <a class="nav-item " href=>
+                    <a class="nav-item " href=$lienCompte>
                         <img src="$path./img/profil.png" width="40" height="40" alt="">
                     </a>
                 </nav>

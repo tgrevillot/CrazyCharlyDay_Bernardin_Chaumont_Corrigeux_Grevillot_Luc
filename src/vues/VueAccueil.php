@@ -55,7 +55,7 @@ class VueAccueil {
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="$lienOffre">Offres d'emploi<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
@@ -66,9 +66,22 @@ class VueAccueil {
                         <img src="./img/profil.png" width="40" height="40" alt="">
                     </a>
                 </nav>
+                
+                <div class = conteneur>
+                     <img class ="icone" src="./img/favicon.png">
+                
+                     <p>Bienvenue sur JustJob ! Notre site permet de mettre en lien candidat en situation de handicap ou non avec des 
+                     employeurs. Vous pouvez candidater aux offres d'emploi disponibles, ou en déposer une si vous souhaitez recruter 
+                     une personne !
+                     </p>
+                     <p>Notre site vous permet également de faciliter vos déplacements pour vous rendre au travail
+                        en proposant quand cela est possible des offres de covoiturage sur certaines offre d'emploi
+                     </p>
+                
+                 </div>
             </body>
 END;
-        return $html;
+        echo $html;
     }
 
     public function afficherPageDaccueil() {
