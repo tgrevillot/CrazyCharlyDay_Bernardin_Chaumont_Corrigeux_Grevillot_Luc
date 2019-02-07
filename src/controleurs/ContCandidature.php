@@ -9,8 +9,8 @@ use justjob\vues as v;
 class ContCandidature {
 
   function afficherTout($id){
-    $user = m\Users::where("idUser","=",$id)->get();
-    $candidature = m\Candidature::where("idCandidat","=",$user->idUser);
+    $user = m\Users::where("id","=",$id)->get();
+    $candidature = m\Candidature::where("idUtilisateur","=",$user->id);
 
     $vue = new v\VueCandidature(),
     $vue->render();

@@ -17,5 +17,10 @@ $app->get("/", function() {
     $v = new VueConnexion("connexion");
     echo $v->render("");
 })->name('formConnexion');
-    
+
+$app->get('/candidatures/$id',function($id){
+    $c = new c\ContCandidature();
+    $c->afficherTout($id);
+});
+
 $app->run();
