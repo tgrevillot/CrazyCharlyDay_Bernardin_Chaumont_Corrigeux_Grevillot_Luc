@@ -137,7 +137,7 @@ class VueCandidature{
     $app = \Slim\Slim::getInstance();
     $lienAccueil = $app->urlFor("accueil");
     $contenu = "<h1>ERREUR !</h1>";
-    $title = "justjob";
+    $title = "Candidatures";
     $path = "";
 
     switch($param){
