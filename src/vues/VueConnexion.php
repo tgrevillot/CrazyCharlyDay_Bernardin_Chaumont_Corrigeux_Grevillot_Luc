@@ -92,8 +92,8 @@ END;
             <p><input type="text" name="pseudo" class="form-control" aria-describedby="emailHelp" placeholder="Pseudo" required></p>
             <p><input type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Mot de passe" required></p>
             <p><input type="password" name="confirmPass" class="form-control" aria-describedby="emailHelp" placeholder="Confirmer mot de passe" required></p>
-            <p><input type="radio" name="role" value="2"> Candidat
-            <input type="radio" name="role" value="1"> Employeur <p>
+            <p><input type="radio" name="role" value="2"><label class="rb"> Candidat </label>
+            <input type="radio" name="role" value="1"><label class="rb"> Employeur </label><p>            
             <p><a href=$lienConnec><label class="annul btn btn-secondary">Annuler</label></a><button type="submit" class="btn btn-primary" name="inscription" value="inscription">Inscription</button></p>
         </form>
 END;
