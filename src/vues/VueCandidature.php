@@ -23,7 +23,7 @@ class VueCandidature{
     $html = '<div class="container">';
 
     $html .= '<div class="row">';
-    $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
+    $html .= '<h1 class="titreCand">Candidatures de '.$this->utilisateur->pseudo.'</h1>';
 
     $html .= '<div class="row1">';
     $html .= '<div class="row2">';
@@ -51,11 +51,28 @@ class VueCandidature{
     $modifierC = $this->app->urlFor('modifierCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
     $html .= '</div></div>';
 
-    $html .= '<div class="row">';
-    $html .= '<form method="GET" action= "'.$modifierC.'">';
-    $html .= '<button class="btn" value="modifierCandidature">Modifier la candidature</button>';
-    $html .= '</form>';
-    $html .= '</div>';
+    if($_SESSION['profile']['role'] == 2){
+      $html .= '<div class="row">';
+      $html .= '<form method="GET" action= "'.$modifierC.'">';
+      $html .= '<button class="btn" value="modifierCandidature">Modifier la candidature</button>';
+      $html .= '</form>';
+      $html .= '</div>';
+    }else if($_SESSION['profile']['role'] == 1) {
+      $attente = $this->candidatures->etat;
+      if($attente == "attente"){
+        $html .= '<div class="row">';
+        $html .= '<form method="GET" action= "'.$modifierC.'">';
+        $html .= '<button class="btn" value="modifierCandidature ">Modifier la candidature</button>';
+        $html .= '</form>';
+        $html .= '</div>';
+      }else{
+        $html .= '<div class="row">';
+        $html .= '<form method="GET" action= "'.$modifierC.'">';
+        $html .= '<button class="btn" value="modifierCandidature" disabled>Modifier la candidature</button>';
+        $html .= '</form>';
+        $html .= '</div>';
+      }
+    }
 
     return $html;
   }
@@ -64,7 +81,7 @@ class VueCandidature{
     $html = '<div class="container">';
 
     $html .= '<div class="row">';
-    $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
+    $html .= '<h1 class="titreCand">Candidatures de '.$this->utilisateur->pseudo.'</h1>';
 
     $html .= '<div class="row1">';
     $html .= '<h2> Formulaire de modification : </h2>';
@@ -72,16 +89,28 @@ class VueCandidature{
     $modifier_C = $this->app->urlFor('validerModification',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
     $suppimerC = $this->app->urlFor('supprimerCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
 
+    if($_SESSION['profile']['role'] == 2){
+      $html .= '<div class="row4">';
+      $html .= '<form method="POST" action= "'.$modifier_C.'">';
+      $html .= '<input type="text" name="adresseD" class="form-control" placeholder="adresseD" value="'.$this->candidatures->adresseD.'">';
+      $html .= '<button class="btn" value="validerModification">Valider la modification</button>';
+      $html .= '</form>';
+      $html .= '<form method="POST" action= "'.$suppimerC.'">';
+      $html .= '<button class="btn" value="supprimerCandidature">Supprimer la candidature</button>';
+      $html .= '</form>';
+      $html .= '</div>';
 
+  }else if($_SESSION['profile']['role'] == 1) {
     $html .= '<div class="row4">';
     $html .= '<form method="POST" action= "'.$modifier_C.'">';
-    $html .= '<input type="text" name="adresseD" class="form-control" placeholder="adresseD" value="'.$this->candidatures->adresseD.'">';
+    $html .= '<input type="text" name="adresseD" class="form-control" placeholder="adresseD" value="'.$this->candidatures->etat.'">';
     $html .= '<button class="btn" value="validerModification">Valider la modification</button>';
     $html .= '</form>';
     $html .= '<form method="POST" action= "'.$suppimerC.'">';
     $html .= '<button class="btn" value="supprimerCandidature">Supprimer la candidature</button>';
     $html .= '</form>';
     $html .= '</div>';
+  }
 
     $html .= '</div></div></div>';
     return $html;
@@ -91,17 +120,15 @@ class VueCandidature{
     $html = '<div class="container">';
 
     $html .= '<div class="row">';
-    $html .= '<h1 class="titreCand">Candidatures de l\'utilisateur '.$this->utilisateur->id.'</h1>';
-    $html .= '<ul>';
-
+    $html .= '<h1 class="titreCand">Candidatures de '.$this->utilisateur->pseudo.'</h1>';
+    $html .= '<div class="row3">';
     if(isset($this->candidatures)){
       foreach($this->candidatures as $value) {
         $lien = $lien = $this->app->urlFor('afficherCandidature', array('token' => $value->token, 'id' => $this->utilisateur->id));
-        $html .= '<li><a href ='. $lien.'>'.$value->nom.'</li>';
+        $html .='<div class="col-sm-4"><a href ='. $lien.'>'.$value->nom.'</div>';
       }
     }
-
-    $html .= '</ul>';
+    $html .= '</div>';
     $html .= '</div></div>';
     return $html;
   }
