@@ -4,7 +4,16 @@ namespace justjob\vues;
 
 class VueAccueil {
 
-    public function __construct(){}
+  private $utilisateur, $app;
+
+  public function __construct($tab = array()){
+
+    if(isset($tab['utilisateur'])){
+      $this->utilisateur = $tab['utilisateur'];
+    }
+
+    $this->app = \Slim\Slim::getInstance();
+  }
 
     public function render(){
         $app = \Slim\Slim::getInstance();
@@ -14,8 +23,8 @@ class VueAccueil {
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
 
-        $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
         $lienCovoiturage = $app->urlFor("viewCovoiturage");
+        $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
 
         $html = <<<END
         <!DOCTYPE html>

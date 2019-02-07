@@ -78,3 +78,8 @@ form{
 .list-group-item:hover {
     background-color: rgb(255, 169, 43);
 }
+
+.btncandidater {
+    margin-top: 15px;
+    margin-left: 10px;
+}
