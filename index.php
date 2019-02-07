@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 use \justjob\bd\ConnectionDB as ConnectionDB;
 use \justjob\controleurs as c;
 use justjob\controleurs\ControleAuthentification as ControleAuthentification;
-use \justjob\vues\VueConnexion as VueConnexion;
+use \justjob\vues as v;
 
 
 session_start();
@@ -17,7 +17,7 @@ $app = new \Slim\Slim();
 
 //Page d'accueil
 $app->get("/", function() {
-    $v = new VueConnexion("connexion", null);
+    $v = new v\VueConnexion("connexion", null);
     echo $v->render("");
 })->name('formConnexion');
 
@@ -56,7 +56,7 @@ $app->post('/supprimerCandidature/:id/:token',function($id,$token){
 
 
 $app->get('/formInscription',function(){
-    $v = new VueConnexion("inscription", null);
+    $v = new v\VueConnexion("inscription", null);
     $v->render("");
 })->name('formInscription');
 
@@ -66,7 +66,7 @@ $app->post("/connexion", function() {
     if(ControleAuthentification::authenticate($_POST['email'], $_POST['pass']))
         $a->redirectTo("accueil");
     else {
-        $v = new VueConnexion("connexion", null);
+        $v = new v\VueConnexion("connexion", null);
         $v->render("ER_CONNEXION");
     }
 })->name("connexion");
@@ -77,13 +77,13 @@ $app->post("/inscription", function() {
     if(ControleAuthentification::createUser())
         $a->redirectTo('accueil');
     else {
-        $v = new VueConnexion("inscription", null);
+        $v = new v\VueConnexion("inscription", null);
         $v->render("ER_INSCRIPTION");
     }
 })->name("inscription");
 
 $app->get('/accueil', function() {
-    $v = new VueAccueil();
+    $v = new v\VueAccueil();
     echo $v->render();
 })->name('accueil');
 
