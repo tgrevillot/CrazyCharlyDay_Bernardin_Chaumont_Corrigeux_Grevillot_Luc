@@ -51,21 +51,12 @@ class VueAccueil {
                     </form> 
                     <div class="collapse navbar-collapse" id="navbarsExample04">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listes</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                    <a class="dropdown-item" href=>Mes listes </a>
-                                    <a class="dropdown-item" href=>Les listes du moment</a>
-                                </div>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="">Candidatures<span class="sr-only">(current)</span>
+                                </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href=>Liste des créateurs<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href=>Contacts <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active" id="compte">
-                                <a class="nav-link" href=>Mon compte <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="">Offres d'emplois<span class="sr-only">(current)</span></a>
                             </li>
                         </ul>
                     </div>
