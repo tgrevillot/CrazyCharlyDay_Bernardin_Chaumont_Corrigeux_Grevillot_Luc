@@ -43,4 +43,9 @@ $app->get('/formInscription',function(){
     echo $v->render("");
 })->name('formInscription');
 
+$app->get('/accueil', function() {
+    $v = new VueAccueil(),
+    echo $v->render();
+})->name('accueil');
+
 $app->run();
