@@ -34,6 +34,7 @@ class VueOffre{
         <p class="list-group-item list-group-item-action">Profil recherché : $offre[profil]</p>
         <p class="list-group-item list-group-item-action">Durée : $offre[duree]</p>
         <p class="list-group-item list-group-item-action">Lieu : $offre[lieu]</p>
+        <p><button class="btncandidater btn btn-primary">Candidater</button></p>
     </div>
 END;
     return $content;
