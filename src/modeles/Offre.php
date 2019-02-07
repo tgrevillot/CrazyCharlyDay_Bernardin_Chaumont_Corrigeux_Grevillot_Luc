@@ -13,7 +13,7 @@ class Offre extends Model{
   }
 
   public function employeur(){
-    return $this->belongsTo('\justjob\modeles\Utilisateur','idEmployeur')
+    return $this->belongsTo('\justjob\modeles\Utilisateur','idEmployeur');
   }
 
   public function candidatures(){
