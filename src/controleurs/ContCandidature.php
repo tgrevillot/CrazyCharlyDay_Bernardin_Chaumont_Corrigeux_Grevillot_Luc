@@ -2,9 +2,7 @@
 
 namespace justjob\controleurs;
 
-require_once 'vendor/autoload.php';
-
-use \wishlist\models as m;
+use justjob\modeles as m;
 
 
 class ContCandidature {

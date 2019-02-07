@@ -1,15 +1,15 @@
 <?php
+
 require_once 'vendor/autoload.php';
-$app = new \Slim\Slim();
-use \Illuminate\Database\Capsule\Manager as DB;
 
+use \justjob\bd\ConnectionDB as ConnectionDB;
+//use \justjob\controleurs\ContCandidature as ContCandidature;
 
-$db = new DB();
-$info= parse_ini_file('src/conf/conf.ini');
-$db->addConnection($info);
-$db->setAsGlobal();
-$db->bootEloquent();
 session_start();
 
+//$test = new ContCandidature();
+ConnectionDB::start('src/conf/conf.ini');
+
+$app = new \Slim\Slim();
 
 $app->run();
