@@ -10,10 +10,7 @@ class Candidature extends Model{
   protected $primaryKey = 'idCandidature';
   public $timestamps = false;
 
-  /**
-  public function candidature() {
-    return $this->belongsTo('\wishlist\models\Liste','liste_id');
+  public function offre(){
+    return $this->belongsTo('\justjob\modeles\Offre','idOffre');
   }
-
-  **/
 }
