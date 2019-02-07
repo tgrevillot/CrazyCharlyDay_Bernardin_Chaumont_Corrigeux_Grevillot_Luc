@@ -17,7 +17,12 @@ class VueUser{
   }
 
   private function afficherCompte(){
-    $html = '<p>'.$this->utilisateur->id.'</p>';
+    $deconection = $this->app->urlFor("deconnexion");
+    $html = "";
+
+    $html .= '<form method="GET" action= "'.$deconection.'">';
+    $html .= '<button class="btn" value="deconnecter">Se deconnecter</button>';
+    $html .= '</form>';
 
     return $html;
   }

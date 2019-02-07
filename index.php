@@ -7,7 +7,7 @@ use \justjob\controleurs as c;
 use justjob\controleurs\ControleAuthentification as ControleAuthentification;
 use justjob\controleurs\ContTransport as ContTrasport;
 use \justjob\vues as v;
-
+use justjob\modeles as m;
 
 session_start();
 
@@ -83,8 +83,9 @@ $app->post("/inscription", function() {
 })->name("inscription");
 
 $app->get('/accueil', function() {
-    $v = new v\VueAccueil();
-    echo $v->render();
+    $user = m\Utilisateur::where("id","=",$_SESSION['profile']['id'])->first();
+    $v = new v\VueAccueil(array("utilisateur" => $user));
+    $v->render();
 })->name('accueil');
 
 /************Offres**************/
@@ -127,8 +128,13 @@ $app->get("/covoiturage/list", function() {
 })->name("viewCovoiturage");
 
 
+$app->get("/Compte",function(){
+  $c = new c\ContUser();
+  $c->afficherCompte();
+})->name("compte");
 
 $app->get("/logout", function() {
-    ControleAuthentification::logout();
+  ControleAuthentification::logout();
 })->name("deconnexion");
+
 $app->run();

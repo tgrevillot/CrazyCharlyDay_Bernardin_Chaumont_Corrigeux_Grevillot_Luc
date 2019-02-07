@@ -122,7 +122,7 @@ class ControleAuthentification {
 
         }
         $app = \Slim\Slim::getInstance();
-        $app->redirectTo("/");
+        $app->redirectTo("formConnexion");
     }
 
 }
