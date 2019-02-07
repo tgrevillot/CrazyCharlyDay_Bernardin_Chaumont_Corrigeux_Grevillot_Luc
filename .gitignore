@@ -1,3 +1,5 @@
 autoPull.php
 vendor/
 composer.lock
+/src/conf/conf.ini
+/.idea/
