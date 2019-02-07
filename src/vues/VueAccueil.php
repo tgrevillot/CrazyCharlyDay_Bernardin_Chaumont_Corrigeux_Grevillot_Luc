@@ -9,27 +9,15 @@ class VueAccueil {
     public function render(){
         $app = \Slim\Slim::getInstance();
 
-        /*switch(){
-            case "accueilAdmin":{
-                $contenu = $this->affichageAdmin();
-                break;
-            }
-
-            case "accueilEmploye":{
-                $contenu = $this->affichageEmploye();
-                break;
-            }
-            case "accueilEmployeur":{
-                $contenu = $this->affichageEmployeur();
-                break;
-            }
-        }*/
-
         $lienAccueil = $app->urlFor("accueil");
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
+<<<<<<< HEAD
         $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
+=======
+        $lienCovoiturage = $app->urlFor("viewCovoiturage");
+>>>>>>> 4da285100325a309c114fd4e932b148392da764d
 
         $html = <<<END
         <!DOCTYPE html>
@@ -62,6 +50,9 @@ class VueAccueil {
                             <li class="nav-item active">
                                 <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
+                            </li>
                         </ul>
                     </div>
                     <a class="nav-item " href=$lienCompte>
@@ -85,17 +76,6 @@ END;
                 <label for="chk" class="show-menu-btn">
                     <i class="fas fa-ellipsis-h"></i>
                 </label>
-
-            case "accueilEmploye":{
-                $contenu = this->affichageEmploye();
-                break;
-            }
-
-            case "accueilEmployeur":{
-                $contenu = this->afficageEmployeur();
-                break;
-            }
-        }
 EOF;
         return $page;
     }

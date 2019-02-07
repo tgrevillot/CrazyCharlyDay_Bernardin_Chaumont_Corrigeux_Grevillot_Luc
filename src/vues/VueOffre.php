@@ -28,10 +28,14 @@ class VueOffre{
   private function afficheDetail(){
     $offre = $this->tab[0];
     $employeur = $this->tab[1];
-    $content = "Offre ".$offre['id']."<br>
-    Employeur : ".$employeur['nom']."<br>
-    Profil recherché :<br>".$offre['profil']."<br><br>".$offre['duree']."<br>
-    Lieu : ".$offre['lieu'];
+    $content = <<<END
+    <div class="list-group">
+        <p class="list-group-item list-group-item-action active">Employeur : $employeur[nom]</p>
+        <p class="list-group-item list-group-item-action">Profil recherché : $offre[profil]</p>
+        <p class="list-group-item list-group-item-action">Durée : $offre[duree]</p>
+        <p class="list-group-item list-group-item-action">Lieu : $offre[lieu]</p>
+    </div>
+END;
     return $content;
   }
 
