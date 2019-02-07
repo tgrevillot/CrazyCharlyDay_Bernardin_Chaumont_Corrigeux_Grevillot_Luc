@@ -13,11 +13,9 @@ class VueAccueil {
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
-<<<<<<< HEAD
+
         $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
-=======
         $lienCovoiturage = $app->urlFor("viewCovoiturage");
->>>>>>> 4da285100325a309c114fd4e932b148392da764d
 
         $html = <<<END
         <!DOCTYPE html>
