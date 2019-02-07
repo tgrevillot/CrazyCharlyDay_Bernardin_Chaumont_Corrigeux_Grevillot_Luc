@@ -12,4 +12,10 @@ ConnectionDB::start('src/conf/conf.ini');
 
 $app = new \Slim\Slim();
 
+
+$app->get('/candidatures/$id',function($id){
+    $c = new c\ContCandidature();
+    $c->afficherTout($id);
+});
+
 $app->run();
