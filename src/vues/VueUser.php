@@ -41,6 +41,7 @@ class VueUser{
     $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
     $lienOffre = $app->urlFor("afficherOffres");
     $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
+    $lienCovoiturage = $app->urlFor("viewCovoiturage");
 
     $html = <<< END
         <!DOCTYPE HTML>
@@ -75,6 +76,9 @@ class VueUser{
                         </li>
                         <li class="nav-item active">
                           <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="$lienCovoiturage">Transport<span class="sr-only">(current)</span></a>
                         </li>
                       </ul>
                     </div>
