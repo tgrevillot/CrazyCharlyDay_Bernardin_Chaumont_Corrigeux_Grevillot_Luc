@@ -24,7 +24,7 @@ $app->get("/", function() {
 $app->get('/candidatures/:id',function($id){
     $c = new c\ContCandidature();
     $c->afficherTout($id);
-});
+})->name('candidatures');
 
 
 $app->get('/candidature/:id/:token',function($id,$token){
@@ -37,6 +37,16 @@ $app->get('/modifierCandidature/:id/:token',function($id,$token){
     $c = new c\ContCandidature();
     $c->modifierCandidature($id,$token);
 })->name('modifierCandidature');
+
+$app->post('/modifierCandidature/:id/:token',function($id,$token){
+  $c = new c\ContCandidature();
+  $c->modifierCandidatureValide($id,$token);
+})->name('validerModification');
+
+$app->post('/supprimerCandidature/:id/:token',function($id,$token){
+  $c = new c\ContCandidature();
+  $c->supprimerCandidature($id,$token);
+})->name('supprimerCandidature');
 
 $app->get('/formInscription',function(){
     $v = new VueConnexion("inscription");
