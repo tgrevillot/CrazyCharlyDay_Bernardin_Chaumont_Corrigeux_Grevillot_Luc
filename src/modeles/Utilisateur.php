@@ -3,7 +3,7 @@
 namespace justjob\modeles;
 Use \Illuminate\Database\Eloquent\Model as Model;
 
-class Utilisateur extends Model{
+class Utilisateur extends Model {
   protected $table = 'user';
   protected $primaryKey = 'id';
   public $timestamps = false;

@@ -55,12 +55,14 @@ EOF;
     }
 
     public function afficherListeCovoit() {
+        var_dump($this->data);
         $val = "";
         foreach($this->data as $value) {
-            $val = $val . "<p>" . $value->nom .  " description : " . $value->description ."</p>";
+            $val = $val . "<p>" . $value[4] .  " description : " . $value[5] ."</p>";
         }
-
         return $val;
     }
+
+
 
 }
