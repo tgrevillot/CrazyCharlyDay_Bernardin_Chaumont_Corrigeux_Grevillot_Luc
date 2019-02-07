@@ -174,6 +174,7 @@ class VueCandidature{
                     <link rel="stylesheet" href="$path./css/bootstrap.min.css">
                     <link rel="stylesheet" href="$path./css/accueil.css">
                     <link rel="stylesheet" href="$path./css/candidatures.css">
+                    <link rel="icon" href="$path./img/favicon.png"
                 </head>
 
                 <body>
