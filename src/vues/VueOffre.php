@@ -36,6 +36,7 @@ class VueOffre{
 
   private function afficherOffres(){
     $offres = $this->tab[0];
+    var_dump($offres);
     $content = "";
     /*
     if(isset($this->tab[1])){
@@ -46,11 +47,13 @@ class VueOffre{
       }
     }
     */
-    $app =\Slim\Slim::getInstance() ;
-    foreach ($offres as $o) {
-      $url = $app->urlFor('afficheItemsListe',[$o->id] ) ;
-      $content = $content."Offre <a href='$url'>$o->id</a><br><br> $o->nom<br>";
+    $app =\Slim\Slim::getInstance();
+    /*
+    foreach($offres as $value){
+      $url = $app->urlFor('afficheItemsListe',[$value->id] ) ;
+      $content = $content."Offre <a href='$url'>$value->id</a><br><br> $value->nom<br>";
     }
+    */
     return $content;
 
   }
