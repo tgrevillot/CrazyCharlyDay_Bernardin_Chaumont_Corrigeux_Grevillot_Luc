@@ -49,7 +49,7 @@ class ContOffre {
       $vue = new v\VueOffre([$offres, $categorie]);
       $vue->render(v\VueOffre::AFFICHER_OFFRES);
     } else
-        echo "Coucou";
+        $this->goBackToHome();
   }
 
   function afficherOffres(){

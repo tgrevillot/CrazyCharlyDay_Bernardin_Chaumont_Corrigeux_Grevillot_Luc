@@ -63,10 +63,10 @@ class VueOffre{
       case self::CREER_OFFRE:
         $content = $this->creerOffreForm();
         break;
-      case 2:
+      case self::AFFICHER_DETAIL:
         $content = $this->afficheDetail();
         break;
-      case 3:
+      case self::AFFICHER_OFFRES:
         $content = $this->afficherOffres();
         break;
     }
