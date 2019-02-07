@@ -50,6 +50,7 @@ class ControleAuthentification {
                             return false;
                         }
                         $utilisateur->save();
+                        self::loadProfile($utilisateur->id);
                         return true;
                     }
                 }

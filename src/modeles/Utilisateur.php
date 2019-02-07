@@ -15,4 +15,13 @@ class Utilisateur extends Model{
   public function candidatures(){
     return $this->hasMany('\justjob\modeles\Candidature','idUtilisateur');
   }
+
+  public function voyageTransporteur() {
+      return $this->hasMany("\justjob\modeles\Transport", "idTransport");
+  }
+
+  public function voyageEmploye() {
+      return $this->hasMany("\justjob\modeles\Transport", "idEmploye");
+  }
+
 }

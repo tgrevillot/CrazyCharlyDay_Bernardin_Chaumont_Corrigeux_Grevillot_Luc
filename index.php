@@ -5,6 +5,7 @@ require_once 'vendor/autoload.php';
 use \justjob\bd\ConnectionDB as ConnectionDB;
 use \justjob\controleurs as c;
 use justjob\controleurs\ControleAuthentification as ControleAuthentification;
+use justjob\controleurs\ContTransport as ContTrasport;
 use \justjob\vues as v;
 
 
@@ -120,5 +121,10 @@ $app->get('/afficherOffresEmployeur/', function(){
 
 
 /*********Covoiturage**********/
+$app->get("/candidatures/covoiturage", function() {
+    $c = new ContTrasport();
+    $c->getCandidatureCovoit();
+})->name("viewCovoiturage");
+
 
 $app->run();
