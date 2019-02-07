@@ -67,7 +67,7 @@ class VueAccueil {
                 </nav>
             </body>
 END;
-        return $html;
+        echo $html;
     }
 
     public function afficherPageDaccueil() {

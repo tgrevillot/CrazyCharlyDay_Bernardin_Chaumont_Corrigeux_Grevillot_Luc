@@ -14,10 +14,10 @@ class ContUser {
     $this->app = \Slim\Slim::getInstance();
   }
 
-  function afficherCompte($id){
-    $user = m\Candidature::where("id","=",$id)->first();
+  function afficherCompte(){
+    $user = m\Utilisateur::where("id","=",$_SESSION['profile']['id'])->first();
 
-    $vue = v\VueUser(array("utilisateur" => $user));
+    $vue = new v\VueUser(array("utilisateur" => $user));
     $vue->render('COMPTE');
   }
 
