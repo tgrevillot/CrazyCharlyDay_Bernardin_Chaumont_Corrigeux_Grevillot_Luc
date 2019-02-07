@@ -121,10 +121,14 @@ $app->get('/afficherOffresEmployeur/', function(){
 
 
 /*********Covoiturage**********/
-$app->get("/candidatures/covoiturage", function() {
+$app->get("/covoiturage/list", function() {
     $c = new ContTrasport();
     $c->getCandidatureCovoit();
 })->name("viewCovoiturage");
 
 
+
+$app->get("/logout", function() {
+    ControleAuthentification::logout();
+})->name("deconnexion");
 $app->run();
