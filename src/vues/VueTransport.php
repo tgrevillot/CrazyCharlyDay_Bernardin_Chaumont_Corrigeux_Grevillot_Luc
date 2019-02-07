@@ -25,7 +25,7 @@ class VueTransport {
         $contenu = "";
         switch($this->selecteur) {
             case self::AFFICHELISTECOVOIT:
-                $contenu = $this->afficherListeCovoit();
+                $contenu = $this->afficherNotYetImplemented();
                 break;
         }
         $page = <<<EOF
@@ -61,6 +61,10 @@ EOF;
             $val = $val . "<p>" . $value[4] .  " description : " . $value[5] ."</p>";
         }
         return $val;
+    }
+
+    public function afficherNotYetImplemented() {
+        return "<h1 class='display-4'>NOT YET IMPLEMENTED</h1>";
     }
 
 

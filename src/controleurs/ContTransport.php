@@ -24,4 +24,9 @@ class ContTransport {
         $v->render();
     }
 
+    public function notYetImplemented() {
+        $v = new VueTransport(VueTransport::AFFICHELISTECOVOIT, null);
+        $v->render();
+    }
+
 }
