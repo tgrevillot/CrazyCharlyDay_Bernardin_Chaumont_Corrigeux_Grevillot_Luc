@@ -28,6 +28,7 @@ class VueAccueil {
         $lienAccueil = $app->urlFor("accueil");
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
+        $lienOffre = $app->urlFor("afficherOffres");
 
         $html = <<<END
         <!DOCTYPE html>
@@ -58,7 +59,7 @@ class VueAccueil {
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="">Offres d'emplois<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
                             </li>
                         </ul>
                     </div>

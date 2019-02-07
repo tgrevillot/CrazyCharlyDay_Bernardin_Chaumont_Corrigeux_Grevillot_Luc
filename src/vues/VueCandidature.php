@@ -1,6 +1,7 @@
 <?php
 
 namespace justjob\vues;
+use justjob\modeles as m;
 
 class VueCandidature{
 
@@ -23,21 +24,39 @@ class VueCandidature{
 
     $html .= '<div class="row">';
     $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
-    $html .= '<ul class="listecand">';
 
-    $html .= '<li>'.$this->candidatures->etat.'</li>';
-    $html .= '<li>'.$this->candidatures->description.'</li>';
-    $html .= '<li>'.$this->candidatures->adresseD.'</li>';
-    $html .= '<li>'.$this->candidatures->adresseA.'</li>';
+    $html .= '<div class="row1">';
+    $html .= '<div class="row2">';
+    $html .= '<h2> Détail de l\'offre</h2>';
+    $html .= '<div class="row3">';
 
-    $html .= '</ul>';
+    $offre = m\Offre::where("id","=",$this->candidatures->idOffre)->first();
+    $html .='<div class="col-sm-4">'.$offre->nom.'</div>';
+    $html .='<div class="col-sm-4">'.$offre->profil.'</div>';
+    $html .='<div class="col-sm-4">'.$offre->duree.'</div>';
+    $html .='<div class="col-sm-4">'.$offre->lieu.'</div>';
+
+    $categorie = m\Categorie::where("id","=",$offre->idCategorie)->first();
+    $html .='<div class="col-sm-4">'.$categorie->nom.'</div>';
+    $html .= '</div></div>';
+
+    $html .= '<div class="row2">';
+    $html .= '<h2> Détail de la candidature</h2>';
+    $html .= '<div>';
+    $html .= '<div class="row3">';
+    $html .= '<div class="col-sm-4">'.$this->candidatures->etat.'</div>';
+    $html .= '<div class="col-sm-4">'.$this->candidatures->adresseD.'</div>';
+    $html .= '</div></div></div>';
 
     $modifierC = $this->app->urlFor('modifierCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
+    $html .= '</div></div>';
 
+    $html .= '<div class="row">';
     $html .= '<form method="GET" action= "'.$modifierC.'">';
     $html .= '<button class="btn" value="modifierCandidature">Modifier la candidature</button>';
     $html .= '</form>';
-    $html .= '</div></div>';
+    $html .= '</div>';
+
     return $html;
   }
 
@@ -46,16 +65,15 @@ class VueCandidature{
 
     $html .= '<div class="row">';
     $html .= '<h1>Candidature de l\'utilisateur '.$this->candidatures->nom.'</h1>';
-    $html .= '<ul class="listecand">';
 
-    $html .= '<li>'.$this->candidatures->etat.'</li>';
-    $html .= '<li>'.$this->candidatures->description.'</li>';
-
-    $html .= '</ul>';
+    $html .= '<div class="row1">';
+    $html .= '<h2> Formulaire de modification : </h2>';
 
     $modifier_C = $this->app->urlFor('validerModification',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
     $suppimerC = $this->app->urlFor('supprimerCandidature',array('id' => $this->utilisateur->id, 'token' => $this->candidatures->token));
 
+
+    $html .= '<div class="row4">';
     $html .= '<form method="POST" action= "'.$modifier_C.'">';
     $html .= '<input type="text" name="adresseD" class="form-control" placeholder="adresseD" value="'.$this->candidatures->adresseD.'">';
     $html .= '<button class="btn" value="validerModification">Valider la modification</button>';
@@ -63,7 +81,9 @@ class VueCandidature{
     $html .= '<form method="POST" action= "'.$suppimerC.'">';
     $html .= '<button class="btn" value="supprimerCandidature">Supprimer la candidature</button>';
     $html .= '</form>';
-    $html .= '</div></div>';
+    $html .= '</div>';
+
+    $html .= '</div></div></div>';
     return $html;
   }
 
@@ -87,7 +107,7 @@ class VueCandidature{
   }
 
   public function render($param){
-    $app = \Slim\Slim::getInstance();        
+    $app = \Slim\Slim::getInstance();
     $lienAccueil = $app->urlFor("accueil");
     $contenu = "<h1>ERREUR !</h1>";
     $title = "justjob";
@@ -110,6 +130,11 @@ class VueCandidature{
         break;
       }
     }
+
+
+    $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
+    $lienOffre = $app->urlFor("afficherOffres");
+
     $html = <<< END
         <!DOCTYPE HTML>
             <html lang="fr">
@@ -134,17 +159,16 @@ class VueCandidature{
                     </button>
                     <form class="form-inline my-2 my-md-0 method="GET" action="">
                         <input class="form-control" type="text" name="search" placeholder="Rechercher">
-                    </form> 
+                    </form>
                     <div class="collapse navbar-collapse" id="navbarsExample04">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="">Candidatures<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="">Offres d'emplois<span class="sr-only">(current)</span></a>
-                            </li>
-                        </ul>
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="$lienCandidature">Candidatures<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                          <a class="nav-link" href="$lienOffre">Offres d'emplois<span class="sr-only">(current)</span></a>
+                        </li>
+                      </ul>
                     </div>
                     <a class="nav-item " href=>
                         <img src="$path./img/profil.png" width="40" height="40" alt="">
