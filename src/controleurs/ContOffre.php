@@ -41,7 +41,7 @@ class ContOffre{
   }
 
   function afficherOffres(){
-    $offres = m\Offre::all();
+    $offres = m\Offre::select('*')->get();
     $vue = new v\VueOffre([$offres]);
     $vue->render(3);
   }
