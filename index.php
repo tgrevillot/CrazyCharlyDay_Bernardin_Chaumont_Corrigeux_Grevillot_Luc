@@ -24,7 +24,7 @@ $app->get("/", function() {
 $app->get('/candidatures/:id',function($id){
     $c = new c\ContCandidature();
     $c->afficherTout($id);
-});
+})->name('candidatures');
 
 //Envoie la liste des utilisateurs disponibles
 $app->get("/chooseAccount", function() {
