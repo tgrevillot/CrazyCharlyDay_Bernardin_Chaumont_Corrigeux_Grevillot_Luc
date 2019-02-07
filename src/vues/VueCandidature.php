@@ -161,6 +161,7 @@ class VueCandidature{
 
     $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
     $lienOffre = $app->urlFor("afficherOffres");
+    $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
 
     $html = <<< END
         <!DOCTYPE HTML>
@@ -198,7 +199,7 @@ class VueCandidature{
                         </li>
                       </ul>
                     </div>
-                    <a class="nav-item " href=>
+                    <a class="nav-item " href=$lienCompte>
                         <img src="$path./img/profil.png" width="40" height="40" alt="">
                     </a>
                     </nav>

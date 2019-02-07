@@ -40,7 +40,7 @@ class VueUser{
 
     $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
     $lienOffre = $app->urlFor("afficherOffres");
-    $lienCompte = $app->urlFor("compte",array('id' => ,$this->utilisateur->id));
+    $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
 
     $html = <<< END
         <!DOCTYPE HTML>
@@ -54,6 +54,7 @@ class VueUser{
                     <link rel="stylesheet" href="$path./css/bootstrap.min.css">
                     <link rel="stylesheet" href="$path./css/accueil.css">
                     <link rel="stylesheet" href="$path./css/candidatures.css">
+                    <link rel="icon" href="$path./img/favicon.png"
                 </head>
 
                 <body>

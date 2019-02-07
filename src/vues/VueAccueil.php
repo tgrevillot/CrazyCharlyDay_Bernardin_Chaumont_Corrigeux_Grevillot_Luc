@@ -29,6 +29,7 @@ class VueAccueil {
 
         $lienCandidature = $app->urlFor("candidatures",array("id" => $_SESSION['profile']['id']));
         $lienOffre = $app->urlFor("afficherOffres");
+        $lienCompte = $app->urlFor("compte",array('id' => $this->utilisateur->id));
 
         $html = <<<END
         <!DOCTYPE html>
@@ -63,7 +64,7 @@ class VueAccueil {
                             </li>
                         </ul>
                     </div>
-                    <a class="nav-item " href=>
+                    <a class="nav-item " href=$lienCompte>
                         <img src="./img/profil.png" width="40" height="40" alt="">
                     </a>
                 </nav>
